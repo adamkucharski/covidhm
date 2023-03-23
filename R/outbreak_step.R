@@ -109,7 +109,7 @@ outbreak_step <- function(day, case_data, net = haslemere,
     case_data$recovery_time[new_infections] <- case_data$onset[new_infections] + 7
     case_data$status[new_infections] <- "I"
 
-    #Isolation times for symtpomatic new infections
+    #Isolation times for symptomatic new infections
     if(isolation)
     {
       sym_cases <- new_infections[!case_data$asym[new_infections]]
@@ -171,8 +171,9 @@ outbreak_step <- function(day, case_data, net = haslemere,
       new_cases <- new_cases[infected,] %>%
         group_by(contact) %>%
         slice_sample(n = 1)
-    }
-
+      }else{
+        new_cases <- data.frame()
+      }
   }
 
 
